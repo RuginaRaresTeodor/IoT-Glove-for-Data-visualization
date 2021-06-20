@@ -25,13 +25,14 @@ body{
   margin: 0;
   z-index: 6;
 }
-.page-editor .page-build .page-controls .page-theory {
-  position: absolute;
+.page-editor,.page-build,.page-controls,.page-theory {
+  /*position: absolute;*/
   display: none;
   width: 100%;
+  top:50%;
   text-align: center;
-  transform: translateY(-50%);
-  top: 50%;
+  /*transform: translateY(-50%);*/
+  height:100vh;
   left: 0;
   padding: 0;
   margin: 0;
@@ -245,10 +246,21 @@ h1{
 .menu-icon:checked ~ .nav ul li:nth-child(3){
   transition-delay: 1560ms;
 }
-.menu-icon:checked ~ .nav ul li:nth-child(4){
+.menu-icon:checked ~ .nav ul li:nth-child(4) {
   transition-delay: 1640ms;
 }
+.page-editor #canvas {
+  width:100vw;
+  height:70vh;
+  overflow: auto;
+}
+svg {
 
+  overflow: scroll;
+}
+.page-editor form {
+margin-top:20px;
+}
 @media screen and (max-width: 991px) {
   .menu-icon:checked + label,
   .menu-icon:not(:checked) + label{
