@@ -1,6 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include "MPU9250.h"
+MPU9250 mpu;
  
 // Replace with your network credentials
 const char* ssid = "HUAWEI-pAUs";
@@ -10,11 +12,19 @@ ESP8266WebServer server(80);   //instantiate server at port 80 (http port)
 String page = "";
 String text = "";
 String data;
+String x;
 static unsigned int last_time = 0;
 void setup(void){
  pinMode(A0, INPUT);
  delay(1000);
  Serial.begin(115200);
+ Wire.begin();
+ if (!mpu.setup(0x68)) {  // change to your own address
+        while (1) {
+            Serial.println("MPU connection failed. Please check your connection with `connection_check` example.");
+            delay(5000);
+        }
+    }
  WiFi.begin(ssid, password); //begin WiFi connection
  Serial.println("");
  
@@ -65,11 +75,31 @@ void setup(void){
 }
  
 void loop(void){
-  
+  if (mpu.update()) {
+        
+       if(mpu.getPitch() <-40){
+       Serial.println("aici");
+       
+       if(!data.endsWith("n")){
+       data+="n";}
+        }
+        if(mpu.getRoll() >60)
+        {if(!data.endsWith("r")){
+       data+="r";}
+          }
+          if(mpu.getRoll() <-60)
+        {if(!data.endsWith("p")){
+       data+="p";}
+          }
+    } 
 if(millis() - last_time >1000 )
-{  int result = readAnalogKey();
+{ 
+  int result = readAnalogKey();
+
  if( result > 0 )
-  {data += String(result);}
+  {data += String(result);
+  x = data;
+  }
   last_time = millis();
 }
  server.handleClient();
