@@ -28,8 +28,10 @@
         <div id="canvas">
         </div>
 
-           <button id="redraw" onclick="redrawFunction()">redraw</button>
-        <textarea id ="console"></textarea>
+           <label for="console"></label>
+
+            <textarea id="console" name="console" rows="4" cols="50">
+            </textarea>
         <h1 id="dada"></h1>
     </div>
     <div class="page-theory" id="theory">
@@ -45,7 +47,7 @@
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js'></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/graphdracula/1.3.0/dracula.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/graphdracula/1.3.0/dracula.dev.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/simplified.js') }}"></script>
 
 </footer>
 </html>
